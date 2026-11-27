@@ -37,7 +37,7 @@ export default function App() {
 }
 ```
 
-Regions appear at zoom level 4 and above, for the countries in view. Change that with `zoom={{ regionDetailMinScale: 3 }}`. Try it with `theme="atlas"`, which draws region borders as fine solid lines (react-svg-worldmap 3.0.0 and later).
+Regions appear at zoom level 4 and above, for the countries in view. Change that with `zoom={{ regionDetailMinScale: 3 }}`. With react-svg-worldmap 3.0.0, add `theme="atlasLight"` for pale water inside the globe and fine solid region borders, and `zoom={{ maxScale: 16, showRegionLabels: true }}` to zoom deeper and name the regions that fit.
 
 ## API
 
