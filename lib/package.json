@@ -1,0 +1,84 @@
+{
+  "name": "react-svg-worldmap-regions",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "State and province (admin-1) regions for react-svg-worldmap, loaded one country at a time.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "README.md",
+    "dist/index.js",
+    "dist/index.cjs",
+    "dist/index.d.ts",
+    "dist/index.d.cts",
+    "dist/regions/*.cjs"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs && node scripts/inline-sourcemaps.cjs",
+    "build:detailed-data": "node scripts/build-regions.mjs",
+    "check:detailed-data": "node scripts/build-regions.mjs --check",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "ESBUILD_LOG_LEVEL=silent vitest run",
+    "test:watch": "ESBUILD_LOG_LEVEL=silent vitest",
+    "test:coverage": "ESBUILD_LOG_LEVEL=silent vitest run --coverage"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "dependencies": {
+    "topojson-client": "^3.1.0"
+  },
+  "peerDependencies": {
+    "react-svg-worldmap": "^2.7.0 || ^3.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "^14.3.1",
+    "@types/topojson-specification": "^1.0.5",
+    "@types/geojson": "^7946.0.16",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-server": "^3.0.4",
+    "@types/topojson-simplify": "^3.0.3",
+    "@vitest/coverage-v8": "^4.1.12",
+    "d3-geo": "^2.0.2",
+    "esbuild": "^0.28.1",
+    "jsdom": "^24.1.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-svg-worldmap": "^2.7.0",
+    "rollup": "^4",
+    "rollup-plugin-dts": "6.2.3",
+    "topojson-server": "^3.0.1",
+    "topojson-simplify": "^3.0.3",
+    "vitest": "^4.1.12"
+  },
+  "authors": [
+    "yanivam (https://github.com/yanivam)"
+  ],
+  "keywords": [
+    "react",
+    "worldmap",
+    "world map",
+    "map",
+    "regions",
+    "states",
+    "provinces",
+    "admin-1",
+    "svg"
+  ],
+  "bugs": "https://github.com/yanivam/react-svg-worldmap-regions/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanivam/react-svg-worldmap-regions.git"
+  }
+}

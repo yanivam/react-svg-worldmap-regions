@@ -1,0 +1,14 @@
+{
+  "extends": "../node_modules/tsconfig-jc/tsconfig.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "declaration": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "esnext",
+    "rootDir": ".",
+    "outDir": "./dist"
+  }
+}
