@@ -5,7 +5,7 @@ States, provinces and other first-level regions (admin-1) for [react-svg-worldma
 - **Optional.** `react-svg-worldmap` works the same with or without this package. Nothing changes until you pass the provider to a map.
 - **Loads only what is needed.** Each country is a separate file that your bundler emits as its own chunk. It downloads the first time the map is zoomed in on that country, and never before.
 - **Local data.** No map service and no network requests other than your own app's chunks.
-- **4,139 regions in 175 countries**, from Natural Earth (public domain), about 2.2 MB in total and 1 to 130 kB per country.
+- **4,139 regions in 175 countries**, from Natural Earth (public domain), about 2.9 MB in total and 1 to 190 kB per country.
 
 ## Install
 
