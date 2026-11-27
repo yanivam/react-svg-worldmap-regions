@@ -155,3 +155,8 @@ vite.config.ts.timestamp-*
 .nx/cache
 .nx/workspace-data
 .nx/migrate-runs
+
+# Downloaded Natural Earth source data (see lib/scripts/build-regions.mjs)
+.cache/
+tmp-smoke/
+.eslintcache

@@ -1,0 +1,11 @@
+dist
+node_modules
+build
+.docusaurus
+coverage
+lib/coverage
+coverage
+lib/coverage
+.cache
+lib/src/regions
+lib/src/loaders.ts

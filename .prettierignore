@@ -1,0 +1,10 @@
+dist
+node_modules
+build
+.docusaurus
+.github
+.specify
+.cache
+coverage
+lib/src/regions
+lib/src/loaders.ts

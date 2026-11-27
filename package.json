@@ -1,0 +1,45 @@
+{
+  "private": true,
+  "workspaces": [
+    "lib",
+    "website"
+  ],
+  "scripts": {
+    "changeset": "changeset",
+    "version": "changeset version",
+    "build:package": "yarn workspace react-svg-worldmap-regions build",
+    "build:data": "yarn workspace react-svg-worldmap-regions build:detailed-data",
+    "build:website": "yarn workspace website build",
+    "build": "yarn build:package && yarn build:website",
+    "start:website": "yarn workspace website start",
+    "format": "prettier --write .",
+    "format-check": "prettier --list-different .",
+    "typecheck": "yarn workspace react-svg-worldmap-regions typecheck && tsc --noEmit -p website/tsconfig.json",
+    "test": "yarn workspace react-svg-worldmap-regions test",
+    "test:coverage": "yarn workspace react-svg-worldmap-regions test:coverage",
+    "lint": "eslint --cache \"**/*.{js,jsx,ts,tsx}\"",
+    "spellcheck": "cspell \"**\" --no-progress"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.31",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "cspell": "^6.31.3",
+    "eslint": "^8.57.1",
+    "eslint-config-jc": "^2.3.3",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "prettier": "^3.9.9",
+    "prettier-config-jc": "^2.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-svg-worldmap": "^2.7.0",
+    "tsconfig-jc": "^2.3.1",
+    "typescript": "^5.4.5",
+    "vite": "^8.0.0"
+  }
+}
