@@ -32,7 +32,13 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Check detailed country data is up to date
+      - name: Cache Natural Earth source data
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: natural-earth-admin1-v5.1.2
+
+      - name: Check region data is up to date
         run: yarn workspace react-svg-worldmap-regions check:detailed-data
 
       - name: Build package
@@ -51,7 +57,7 @@ jobs:
           cd lib && npm pack && cd ..
           mkdir -p tmp-smoke && cd tmp-smoke
           npm init -y
-          npm install ../lib/react-svg-worldmap-regions-*.tgz react react-dom vite@8.3.4 webpack@5.105.4 --save
+          npm install ../lib/react-svg-worldmap-regions-*.tgz react-svg-worldmap react react-dom vite@8.3.4 webpack@5.105.4 --save
           cp ../lib/scripts/smoke-cjs.cjs ../lib/scripts/smoke-esm.mjs ../lib/scripts/smoke-bundlers.mjs .
           node smoke-cjs.cjs
           node smoke-esm.mjs
