@@ -15,6 +15,12 @@ export interface RegionsDetailProviderOptions {
   countries?: readonly string[];
   /** Countries that never get regions. Applied after `countries`. */
   exclude?: readonly string[];
+  /**
+   * `"governing"` (default): only levels of government between the country
+   * and its municipalities. `"all"`: every first-level administrative
+   * division (Natural Earth admin-1).
+   */
+  tier?: "governing" | "all";
 }
 
 /** The view react-svg-worldmap 3 passes to `loadRegions` and `viewKey`. */
@@ -134,7 +140,9 @@ export function createProviderFromStore(
         return createFailedDetailResult(
           countryCode,
           error instanceof Error
-            ? `Regions for ${countryCode.toUpperCase()} could not be loaded: ${error.message}`
+            ? `Regions for ${countryCode.toUpperCase()} could not be loaded: ${
+                error.message
+              }`
             : undefined,
         );
       }

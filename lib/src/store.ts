@@ -39,6 +39,9 @@ export interface RegionCountryInfo {
   name: string;
   /** Number of regions. */
   regionCount: number;
+  /** Where the regions come from, when not Natural Earth. */
+  source?: string;
+  sourceUrl?: string;
 }
 
 export type RegionLoader = () => Promise<unknown>;
@@ -139,6 +142,8 @@ export interface RegionStore {
 export function createRegionStore(
   loaders: Readonly<Record<string, RegionLoader>>,
   countries: Readonly<Record<string, RegionCountryInfo>>,
+  /** The file name of a country's regions (default: its code). */
+  baseOf: (countryCode: string) => string = (countryCode) => countryCode,
 ): RegionStore {
   const files = new Map<string, Promise<unknown>>();
   const decoded = new Map<string, RegionFeature[]>();
@@ -167,7 +172,7 @@ export function createRegionStore(
   async function manifest(code: string): Promise<CountryManifest> {
     const known = manifests.get(code);
     if (known) return known;
-    const loaded = unwrap<CountryManifest>(await loadFile(code));
+    const loaded = unwrap<CountryManifest>(await loadFile(baseOf(code)));
     manifests.set(code, loaded);
     return loaded;
   }
@@ -227,10 +232,14 @@ export function createRegionStore(
     if (cached) return cached;
     const parts =
       level === 0
-        ? [await regionsOf(code, code, () => Promise.resolve(known.topology))]
+        ? [
+            await regionsOf(code, baseOf(code), () =>
+              Promise.resolve(known.topology),
+            ),
+          ]
         : await Promise.all(
             chunks.map((index) => {
-              const name = `${code}-${level}-${index}`;
+              const name = `${baseOf(code)}-${level}-${index}`;
               return regionsOf(code, name, async () =>
                 unwrap<RegionTopology>(await loadFile(name)),
               );
@@ -241,8 +250,8 @@ export function createRegionStore(
       countryName: countries[code]?.name ?? code,
       coverageStatus: "complete",
       regions: parts.flat(),
-      sourceSummary,
-      sourceUrl,
+      sourceSummary: countries[code]?.source ?? sourceSummary,
+      sourceUrl: countries[code]?.sourceUrl ?? sourceUrl,
     };
     collections.set(key, collection);
     return collection;
@@ -258,7 +267,7 @@ export function createRegionStore(
     manifest(code).then(
       (known) => {
         for (const index of chunksInView(known, level, bounds))
-          loadFile(`${code}-${level}-${index}`).catch(() => undefined);
+          loadFile(`${baseOf(code)}-${level}-${index}`).catch(() => undefined);
       },
       () => undefined,
     );

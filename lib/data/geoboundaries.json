@@ -1,0 +1,50 @@
+{
+  "description": "geoBoundaries gbOpen files for the countries whose governing tier Natural Earth does not have (see governing-tiers.json, tier \"replace\"). Downloaded into ../.cache/geoboundaries/ and checked against these SHA-256 hashes. Snapshot 1c423398 (built 2026-11-02).",
+  "snapshot": "https://www.geoboundaries.org/data/snapshots/1c423398df24ddf6e730b116567d2181c9782778d0459c3f3b76ca2f9f12b6bc/gbOpen",
+  "files": {
+    "KEN-ADM1": {
+      "path": "KEN/ADM1/geoBoundaries-KEN-ADM1.geojson",
+      "sha256": "5daff5ae86c21c1b1ade354d03e33941cb248e67f460c5d74aaa4290a4bc6112",
+      "license": "Public Domain",
+      "attribution": "geoBoundaries (Runfola et al. 2020); RCMRD GeoPortal, Africa GeoPortal"
+    },
+    "NPL-ADM1": {
+      "path": "NPL/ADM1/geoBoundaries-NPL-ADM1.geojson",
+      "sha256": "83d4b7dcbc65700ecf150ccf515c0487a1222d3b7a28103f3b5542b03f575965",
+      "license": "CC BY 3.0 IGO",
+      "attribution": "geoBoundaries (Runfola et al. 2020); Survey Department of Nepal",
+      "names": {
+        "Biratnagar": "Koshi",
+        "Janakpur": "Madhesh",
+        "Sudurpaschim": "Sudurpashchim"
+      },
+      "iso": {
+        "Biratnagar": "NP-P1",
+        "Janakpur": "NP-P2",
+        "Bagmati": "NP-P3",
+        "Gandaki": "NP-P4",
+        "Lumbini": "NP-P5",
+        "Karnali": "NP-P6",
+        "Sudurpaschim": "NP-P7"
+      }
+    },
+    "BGD-ADM2": {
+      "path": "BGD/ADM2/geoBoundaries-BGD-ADM2.geojson",
+      "sha256": "793fc0b2afcc3310d85777a7cc71ec6e9c0ca4cd24fd9c1695956257f46086e5",
+      "license": "CC BY 3.0 IGO",
+      "attribution": "geoBoundaries (Runfola et al. 2020); Bangladesh Bureau of Statistics (BBS), OCHA ROAP"
+    },
+    "CIV-ADM2": {
+      "path": "CIV/ADM2/geoBoundaries-CIV-ADM2.geojson",
+      "sha256": "3099f0ffa2812f0cd3e4c9aad2b870ed65efcff6875f83775a610ae810c935e0",
+      "license": "CC BY 4.0",
+      "attribution": "geoBoundaries (Runfola et al. 2020); World Bank"
+    },
+    "SEN-ADM2": {
+      "path": "SEN/ADM2/geoBoundaries-SEN-ADM2.geojson",
+      "sha256": "3cb434c87fb53e2c02679e7b6793da2dc39f71939fca8574f841b07b67e1f46b",
+      "license": "CC BY 3.0 IGO",
+      "attribution": "geoBoundaries (Runfola et al. 2020); Government of Senegal, OCHA ROWCA"
+    }
+  }
+}

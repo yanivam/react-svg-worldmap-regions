@@ -1,12 +1,16 @@
 import type { RegionCollection } from "react-svg-worldmap";
-import { regionCountries, regionLoaders } from "./loaders.js";
+import {
+  allRegionCountries,
+  governingRegionCountries,
+  regionLoaders,
+} from "./loaders.js";
 import type {
   RegionsDetailProvider,
   RegionsDetailProviderOptions,
 } from "./provider.js";
 import { createProviderFromStore } from "./provider.js";
+import type { Bounds, DetailLevel, RegionStore } from "./store.js";
 import { createRegionStore } from "./store.js";
-import type { DetailLevel } from "./store.js";
 
 export type {
   RegionsDetailProvider,
@@ -16,50 +20,84 @@ export type {
 export type { DetailLevel, RegionCountryInfo } from "./store.js";
 export { sourceSummary, sourceUrl } from "./store.js";
 
-const store = createRegionStore(regionLoaders, regionCountries);
+/**
+ * Which regions to use. `"governing"` (the default): only a level of
+ * government between the country and its municipalities, such as US states
+ * or Italian regions; countries without one (Israel, Ireland, the Baltic
+ * states, ...) have none. `"all"`: Natural Earth's first-level
+ * administrative divisions for every country, governing or not.
+ */
+export type RegionTier = "governing" | "all";
+
+const stores: Record<RegionTier, RegionStore> = {
+  governing: createRegionStore(
+    regionLoaders,
+    governingRegionCountries,
+    (code) => (governingRegionCountries[code]?.own ? `${code}-G` : code),
+  ),
+  all: createRegionStore(regionLoaders, allRegionCountries),
+};
 
 /**
- * ISO 3166-1 alpha-2 codes of the countries that have regions, with each
- * country's name and region count. Reading this loads no region data.
+ * The countries with a governing middle tier, keyed by ISO 3166-1 alpha-2
+ * code, with each country's name and region count. Reading this loads no
+ * region data.
  */
-export { regionCountries };
+export const regionCountries = governingRegionCountries;
 
-/** Codes of the countries that have regions, sorted. */
-export const regionCountryCodes: readonly string[] = Object.keys(
-  regionCountries,
-).sort((a, b) => a.localeCompare(b));
+/** Every country with administrative regions (tier `"all"`). */
+export { allRegionCountries };
 
-/** Whether the package has regions for a country. */
-export function hasRegions(countryCode: string): boolean {
-  return store.has(countryCode);
+const sortedCodes = (countries: object): readonly string[] =>
+  Object.keys(countries).sort((a, b) => a.localeCompare(b));
+
+/** Codes of the countries with a governing middle tier, sorted. */
+export const regionCountryCodes = sortedCodes(governingRegionCountries);
+
+/** Codes of every country with administrative regions, sorted. */
+export const allRegionCountryCodes = sortedCodes(allRegionCountries);
+
+/** Whether the package has regions for a country, in a tier. */
+export function hasRegions(
+  countryCode: string,
+  tier: RegionTier = "governing",
+): boolean {
+  return stores[tier].has(countryCode);
+}
+
+export interface LoadRegionsOptions {
+  /** Level of detail: 0, 1 or 2 (the most detailed, default). */
+  level?: DetailLevel;
+  /** Only the part within `[west, south, east, north]`, in degrees. */
+  bounds?: Bounds;
+  /** Default `"governing"`. */
+  tier?: RegionTier;
 }
 
 /**
- * Loads one country's regions, at a level of detail (default 2, the most
- * detailed) and optionally only the part within `[west, south, east, north]`
- * bounds. The data is split into files that bundlers emit as chunks of their
- * own, so each downloads only the first time it is needed. Resolves to
- * `undefined` for a country without regions.
+ * Loads one country's regions. The data is split into files that bundlers
+ * emit as chunks of their own, so each downloads only the first time it is
+ * needed. Resolves to `undefined` for a country without regions in the
+ * tier.
  */
 export function loadRegionCollection(
   countryCode: string,
-  level: DetailLevel = 2,
-  bounds?: readonly [number, number, number, number],
+  { level = 2, bounds, tier = "governing" }: LoadRegionsOptions = {},
 ): Promise<RegionCollection | undefined> {
-  return store.load(countryCode, level, bounds);
+  return stores[tier].load(countryCode, level, bounds);
 }
 
 /**
- * Starts loading the regions of these countries ahead of time, at a level of
- * detail (default 0, what the map shows first).
+ * Starts loading the regions of these countries ahead of time (default:
+ * level 0, what the map shows first).
  */
 export function preloadRegions(
   countryCodes: readonly string[],
-  level: DetailLevel = 0,
+  { level = 0, tier = "governing" }: LoadRegionsOptions = {},
 ): Promise<void> {
-  return Promise.all(countryCodes.map((code) => store.load(code, level))).then(
-    () => undefined,
-  );
+  return Promise.all(
+    countryCodes.map((code) => stores[tier].load(code, level)),
+  ).then(() => undefined);
 }
 
 /**
@@ -77,7 +115,7 @@ export function preloadRegions(
  * zoom in. With 2.x, it loads each country once.
  */
 export function createRegionsDetailProvider(
-  options?: RegionsDetailProviderOptions,
+  options: RegionsDetailProviderOptions = {},
 ): RegionsDetailProvider {
-  return createProviderFromStore(store, options);
+  return createProviderFromStore(stores[options.tier ?? "governing"], options);
 }

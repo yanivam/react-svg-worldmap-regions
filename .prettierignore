@@ -8,3 +8,4 @@ build
 coverage
 lib/src/regions
 lib/src/loaders.ts
+docs/governing-tier.md

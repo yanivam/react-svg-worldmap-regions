@@ -1,0 +1,948 @@
+{
+  "description": "Which countries get regions with tier 'governing' (the default): only levels of government between the country and its municipalities. keep: Natural Earth's admin-1 units are that tier. none: no such tier. group: dissolve Natural Earth units into the real tier. only: keep only the self-governing units. replace: Natural Earth is out of date; boundaries from geoBoundaries, clipped to the country's Natural Earth outline. See docs/map-data.md.",
+  "sources": {
+    "SNG-WOFI": "OECD and UCLG, World Observatory on Subnational Government Finance and Investment, dataset DSD_SNG_WOFI@DF_SNG_STRUCT, 2020 values, retrieved 2026-11-28 (https://www.sng-wofi.org/data/)"
+  },
+  "countries": {
+    "AE": {
+      "tier": "keep",
+      "name": "United Arab Emirates",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "AF": {
+      "tier": "none",
+      "name": "Afghanistan",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "AL": {
+      "tier": "keep",
+      "name": "Albania",
+      "source": "SNG-WOFI 2020: 12 regional, 0 intermediate, 61 municipal governments"
+    },
+    "AM": {
+      "tier": "none",
+      "name": "Armenia",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 484 municipal governments"
+    },
+    "AO": {
+      "tier": "keep",
+      "name": "Angola",
+      "source": "SNG-WOFI 2020: 18 regional, 0 intermediate, 164 municipal governments"
+    },
+    "AR": {
+      "tier": "keep",
+      "name": "Argentina",
+      "source": "SNG-WOFI 2020: 24 regional, 0 intermediate, 2311 municipal governments"
+    },
+    "AT": {
+      "tier": "keep",
+      "name": "Austria",
+      "source": "SNG-WOFI 2020: 9 regional, 0 intermediate, 2093 municipal governments"
+    },
+    "AU": {
+      "tier": "keep",
+      "name": "Australia",
+      "source": "SNG-WOFI 2020: 8 regional, 0 intermediate, 537 municipal governments"
+    },
+    "AZ": {
+      "tier": "group",
+      "by": "region",
+      "only": ["Naxçıvan Autonomous Republic"],
+      "note": "only the Nakhchivan Autonomous Republic has its own government",
+      "name": "Azerbaijan",
+      "source": "SNG-WOFI 2020: 1 regional, 0 intermediate, 1606 municipal governments"
+    },
+    "BA": {
+      "tier": "group",
+      "by": "region",
+      "note": "regrouped into the two entities (the Federation and Republika Srpska)",
+      "name": "Bosnia and Herzegovina",
+      "source": "SNG-WOFI 2020: 3 regional, 10 intermediate, 141 municipal governments"
+    },
+    "BD": {
+      "tier": "replace",
+      "source": "SNG-WOFI 2020: 64 regional, 492 intermediate, 4894 municipal governments",
+      "note": "64 districts (zila parishads) from geoBoundaries; Natural Earth has the 7 administrative divisions",
+      "name": "Bangladesh",
+      "file": "BGD-ADM2"
+    },
+    "BE": {
+      "tier": "keep",
+      "name": "Belgium",
+      "source": "SNG-WOFI 2020: 6 regional, 10 intermediate, 581 municipal governments"
+    },
+    "BF": {
+      "tier": "group",
+      "by": "region",
+      "note": "45 provinces regrouped into the 13 regions",
+      "name": "Burkina Faso",
+      "source": "SNG-WOFI 2020: 13 regional, 0 intermediate, 351 municipal governments"
+    },
+    "BG": {
+      "tier": "none",
+      "name": "Bulgaria",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 265 municipal governments"
+    },
+    "BI": {
+      "tier": "none",
+      "name": "Burundi",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 119 municipal governments"
+    },
+    "BJ": {
+      "tier": "none",
+      "name": "Benin",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 77 municipal governments"
+    },
+    "BN": {
+      "tier": "none",
+      "name": "Brunei Darussalam",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "BO": {
+      "tier": "keep",
+      "name": "Bolivia",
+      "source": "SNG-WOFI 2020: 9 regional, 1 intermediate, 340 municipal governments"
+    },
+    "BR": {
+      "tier": "keep",
+      "name": "Brazil",
+      "source": "SNG-WOFI 2020: 27 regional, 0 intermediate, 5570 municipal governments"
+    },
+    "BS": {
+      "tier": "none",
+      "name": "Bahamas",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "BT": {
+      "tier": "keep",
+      "name": "Bhutan",
+      "source": "SNG-WOFI 2020: 20 regional, 0 intermediate, 209 municipal governments"
+    },
+    "BW": {
+      "tier": "none",
+      "name": "Botswana",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 16 municipal governments"
+    },
+    "BY": {
+      "tier": "keep",
+      "name": "Belarus",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "BZ": {
+      "tier": "none",
+      "name": "Belize",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "CA": {
+      "tier": "keep",
+      "name": "Canada",
+      "source": "SNG-WOFI 2020: 13 regional, 0 intermediate, 3905 municipal governments"
+    },
+    "CD": {
+      "tier": "keep",
+      "name": "Democratic Republic of the Congo",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "CF": {
+      "tier": "none",
+      "name": "Central African Republic",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "CG": {
+      "tier": "keep",
+      "name": "Republic of the Congo",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "CH": {
+      "tier": "keep",
+      "name": "Switzerland",
+      "source": "SNG-WOFI 2020: 26 regional, 0 intermediate, 2148 municipal governments"
+    },
+    "CI": {
+      "tier": "replace",
+      "source": "SNG-WOFI 2020: 31 regional, 0 intermediate, 201 municipal governments",
+      "note": "the regions (2016) from geoBoundaries; Natural Earth has the old regions",
+      "name": "Côted'Ivoire",
+      "file": "CIV-ADM2"
+    },
+    "CL": {
+      "tier": "keep",
+      "name": "Chile",
+      "source": "SNG-WOFI 2020: 16 regional, 0 intermediate, 345 municipal governments"
+    },
+    "CM": {
+      "tier": "keep",
+      "name": "Cameroon",
+      "source": "SNG-WOFI 2020: 10 regional, 14 intermediate, 360 municipal governments"
+    },
+    "CN": {
+      "tier": "keep",
+      "name": "China",
+      "source": "SNG-WOFI 2020: 31 regional, 333 intermediate, 2844 municipal governments"
+    },
+    "CO": {
+      "tier": "keep",
+      "name": "Colombia",
+      "source": "SNG-WOFI 2020: 32 regional, 0 intermediate, 1103 municipal governments"
+    },
+    "CR": {
+      "tier": "none",
+      "name": "Costa Rica",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 82 municipal governments"
+    },
+    "CU": {
+      "tier": "keep",
+      "name": "Cuba",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "CY": {
+      "tier": "none",
+      "name": "Cyprus",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 380 municipal governments"
+    },
+    "CYP": {
+      "tier": "none",
+      "name": "Northern Cyprus",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "CZ": {
+      "tier": "keep",
+      "name": "Czech Republic",
+      "source": "SNG-WOFI 2020: 14 regional, 0 intermediate, 6258 municipal governments"
+    },
+    "DE": {
+      "tier": "keep",
+      "name": "Germany",
+      "source": "SNG-WOFI 2020: 16 regional, 400 intermediate, 10789 municipal governments"
+    },
+    "DJ": {
+      "tier": "keep",
+      "name": "Djibouti",
+      "source": "SNG-WOFI 2020: 5 regional, 0 intermediate, 4 municipal governments"
+    },
+    "DK": {
+      "tier": "keep",
+      "name": "Denmark",
+      "source": "SNG-WOFI 2020: 5 regional, 0 intermediate, 98 municipal governments"
+    },
+    "DO": {
+      "tier": "none",
+      "name": "Dominican Republic",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 158 municipal governments"
+    },
+    "DZ": {
+      "tier": "keep",
+      "name": "Algeria",
+      "source": "SNG-WOFI 2020: 553 regional, 0 intermediate, 1571 municipal governments"
+    },
+    "EC": {
+      "tier": "keep",
+      "name": "Ecuador",
+      "source": "SNG-WOFI 2020: 0 regional, 24 intermediate, 221 municipal governments"
+    },
+    "EE": {
+      "tier": "none",
+      "name": "Estonia",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 79 municipal governments"
+    },
+    "EG": {
+      "tier": "keep",
+      "name": "Egypt",
+      "source": "SNG-WOFI 2020: 27 regional, 225 intermediate, 4695 municipal governments"
+    },
+    "EH": {
+      "tier": "none",
+      "name": "Western Sahara",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "ER": {
+      "tier": "none",
+      "name": "Eritrea",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "ES": {
+      "tier": "group",
+      "by": "region",
+      "note": "52 provinces regrouped into the 17 autonomous communities, plus Ceuta and Melilla",
+      "name": "Spain",
+      "source": "SNG-WOFI 2020: 17 regional, 50 intermediate, 8131 municipal governments"
+    },
+    "ET": {
+      "tier": "keep",
+      "name": "Ethiopia",
+      "source": "SNG-WOFI 2020: 13 regional, 68 intermediate, 1012 municipal governments"
+    },
+    "FI": {
+      "tier": "keep",
+      "name": "Finland",
+      "source": "SNG-WOFI 2020: 22 regional, 0 intermediate, 309 municipal governments"
+    },
+    "FJ": {
+      "tier": "none",
+      "name": "Fiji",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "FK": {
+      "tier": "none",
+      "name": "Falkland Islands",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "FR": {
+      "tier": "group",
+      "by": "region",
+      "note": "101 departments regrouped into the 18 regions (departments are elected too; regions are the upper tier)",
+      "name": "France",
+      "source": "SNG-WOFI 2020: 18 regional, 101 intermediate, 34955 municipal governments"
+    },
+    "GA": {
+      "tier": "keep",
+      "name": "Gabon",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "GB": {
+      "tier": "group",
+      "by": "geonunit",
+      "only": ["Scotland", "Wales", "Northern Ireland"],
+      "note": "local authorities regrouped into the three devolved nations; England has no regional government",
+      "name": "United Kingdom",
+      "source": "SNG-WOFI 2020: 3 regional, 35 intermediate, 374 municipal governments"
+    },
+    "GE": {
+      "tier": "only",
+      "ids": ["GE-AB", "GE-AJ", "GE-TB"],
+      "note": "Abkhazia, Adjara and Tbilisi; the other regions are administrative",
+      "name": "Georgia",
+      "source": "SNG-WOFI 2020: 3 regional, 0 intermediate, 64 municipal governments"
+    },
+    "GH": {
+      "tier": "none",
+      "name": "Ghana",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 261 municipal governments"
+    },
+    "GL": {
+      "tier": "none",
+      "name": "Greenland",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "GM": {
+      "tier": "keep",
+      "name": "The Gambia",
+      "source": "SNG-WOFI 2020: 5 regional, 0 intermediate, 2 municipal governments"
+    },
+    "GN": {
+      "tier": "group",
+      "by": "region",
+      "note": "34 prefectures regrouped into the 8 regions",
+      "name": "Guinea",
+      "source": "SNG-WOFI 2020: 8 regional, 0 intermediate, 362 municipal governments"
+    },
+    "GQ": {
+      "tier": "none",
+      "name": "Equatorial Guinea",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "GR": {
+      "tier": "keep",
+      "name": "Greece",
+      "source": "SNG-WOFI 2020: 13 regional, 0 intermediate, 325 municipal governments"
+    },
+    "GT": {
+      "tier": "none",
+      "name": "Guatemala",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 340 municipal governments"
+    },
+    "GW": {
+      "tier": "none",
+      "name": "Guinea-Bissau",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "GY": {
+      "tier": "keep",
+      "name": "Guyana",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "HN": {
+      "tier": "none",
+      "name": "Honduras",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 298 municipal governments"
+    },
+    "HR": {
+      "tier": "keep",
+      "name": "Croatia",
+      "source": "SNG-WOFI 2020: 21 regional, 0 intermediate, 555 municipal governments"
+    },
+    "HT": {
+      "tier": "none",
+      "name": "Haiti",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 146 municipal governments"
+    },
+    "HU": {
+      "tier": "only",
+      "types": ["County", "Capital City"],
+      "note": "the 19 counties and Budapest; cities with county rights are municipalities",
+      "name": "Hungary",
+      "source": "SNG-WOFI 2020: 20 regional, 0 intermediate, 3177 municipal governments"
+    },
+    "ID": {
+      "tier": "keep",
+      "name": "Indonesia",
+      "source": "SNG-WOFI 2020: 34 regional, 514 intermediate, 83813 municipal governments"
+    },
+    "IE": {
+      "tier": "none",
+      "name": "Ireland",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 31 municipal governments"
+    },
+    "IL": {
+      "tier": "none",
+      "name": "Israel",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 258 municipal governments"
+    },
+    "IN": {
+      "tier": "keep",
+      "name": "India",
+      "source": "SNG-WOFI 2020: 36 regional, 0 intermediate, 267428 municipal governments"
+    },
+    "IQ": {
+      "tier": "keep",
+      "name": "Iraq",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "IR": {
+      "tier": "none",
+      "name": "Iran",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "IS": {
+      "tier": "none",
+      "name": "Iceland",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 69 municipal governments"
+    },
+    "IT": {
+      "tier": "group",
+      "by": "region",
+      "note": "110 provinces regrouped into the 20 regions",
+      "name": "Italy",
+      "source": "SNG-WOFI 2020: 20 regional, 0 intermediate, 7904 municipal governments"
+    },
+    "JM": {
+      "tier": "none",
+      "name": "Jamaica",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 14 municipal governments"
+    },
+    "JO": {
+      "tier": "keep",
+      "name": "Jordan",
+      "source": "SNG-WOFI 2020: 12 regional, 0 intermediate, 101 municipal governments"
+    },
+    "JP": {
+      "tier": "keep",
+      "name": "Japan",
+      "source": "SNG-WOFI 2020: 47 regional, 0 intermediate, 1747 municipal governments"
+    },
+    "KE": {
+      "tier": "replace",
+      "source": "SNG-WOFI 2020: 47 regional, 0 intermediate, 59 municipal governments",
+      "note": "47 counties (since 2013) from geoBoundaries; Natural Earth has the 8 provinces abolished in 2013",
+      "name": "Kenya",
+      "file": "KEN-ADM1"
+    },
+    "KG": {
+      "tier": "none",
+      "name": "Kyrgyzstan",
+      "source": "SNG-WOFI 2020: 2 regional, 12 intermediate, 484 municipal governments"
+    },
+    "KH": {
+      "tier": "keep",
+      "name": "Cambodia",
+      "source": "SNG-WOFI 2020: 25 regional, 203 intermediate, 1646 municipal governments"
+    },
+    "KP": {
+      "tier": "keep",
+      "name": "Dem. Rep. Korea",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "KR": {
+      "tier": "keep",
+      "name": "Republic of Korea",
+      "source": "SNG-WOFI 2020: 17 regional, 0 intermediate, 226 municipal governments"
+    },
+    "KW": {
+      "tier": "none",
+      "name": "Kuwait",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "KZ": {
+      "tier": "keep",
+      "name": "Kazakhstan",
+      "source": "SNG-WOFI 2020: 17 regional, 216 intermediate, 6938 municipal governments"
+    },
+    "LA": {
+      "tier": "keep",
+      "name": "Lao PDR",
+      "source": "SNG-WOFI 2020: 18 regional, 148 intermediate, 8507 municipal governments"
+    },
+    "LB": {
+      "tier": "none",
+      "name": "Lebanon",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "LK": {
+      "tier": "group",
+      "by": "region",
+      "note": "25 districts regrouped into the 9 provinces",
+      "name": "Sri Lanka",
+      "source": "SNG-WOFI 2020: 9 regional, 0 intermediate, 341 municipal governments"
+    },
+    "LR": {
+      "tier": "keep",
+      "name": "Liberia",
+      "source": "SNG-WOFI 2020: 15 regional, 126 intermediate, 24 municipal governments"
+    },
+    "LS": {
+      "tier": "none",
+      "name": "Lesotho",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "LT": {
+      "tier": "none",
+      "name": "Lithuania",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 60 municipal governments"
+    },
+    "LU": {
+      "tier": "none",
+      "name": "Luxembourg",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 102 municipal governments"
+    },
+    "LV": {
+      "tier": "none",
+      "name": "Latvia",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 43 municipal governments"
+    },
+    "LY": {
+      "tier": "none",
+      "name": "Libya",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "MA": {
+      "tier": "keep",
+      "name": "Morocco",
+      "source": "SNG-WOFI 2020: 12 regional, 75 intermediate, 1538 municipal governments"
+    },
+    "MD": {
+      "tier": "keep",
+      "name": "Moldova",
+      "source": "SNG-WOFI 2020: 35 regional, 0 intermediate, 898 municipal governments"
+    },
+    "ME": {
+      "tier": "none",
+      "name": "Montenegro",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 24 municipal governments"
+    },
+    "MG": {
+      "tier": "keep",
+      "name": "Madagascar",
+      "source": "SNG-WOFI 2020: 6 regional, 23 intermediate, 1695 municipal governments"
+    },
+    "MK": {
+      "tier": "none",
+      "name": "Macedonia",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 81 municipal governments"
+    },
+    "ML": {
+      "tier": "keep",
+      "name": "Mali",
+      "source": "SNG-WOFI 2020: 11 regional, 58 intermediate, 750 municipal governments"
+    },
+    "MM": {
+      "tier": "keep",
+      "name": "Myanmar",
+      "source": "SNG-WOFI 2020: 14 regional, 0 intermediate, 0 municipal governments"
+    },
+    "MN": {
+      "tier": "keep",
+      "name": "Mongolia",
+      "source": "SNG-WOFI 2020: 22 regional, 339 intermediate, 1710 municipal governments"
+    },
+    "MR": {
+      "tier": "keep",
+      "name": "Mauritania",
+      "source": "SNG-WOFI 2020: 13 regional, 0 intermediate, 219 municipal governments"
+    },
+    "MW": {
+      "tier": "none",
+      "name": "Malawi",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 35 municipal governments"
+    },
+    "MX": {
+      "tier": "keep",
+      "name": "Mexico",
+      "source": "SNG-WOFI 2020: 32 regional, 0 intermediate, 2481 municipal governments"
+    },
+    "MY": {
+      "tier": "keep",
+      "name": "Malaysia",
+      "source": "SNG-WOFI 2020: 13 regional, 0 intermediate, 151 municipal governments"
+    },
+    "MZ": {
+      "tier": "keep",
+      "name": "Mozambique",
+      "source": "SNG-WOFI 2020: 11 regional, 0 intermediate, 53 municipal governments"
+    },
+    "NA": {
+      "tier": "keep",
+      "name": "Namibia",
+      "source": "SNG-WOFI 2020: 14 regional, 0 intermediate, 57 municipal governments"
+    },
+    "NC": {
+      "tier": "keep",
+      "name": "New Caledonia",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "NE": {
+      "tier": "keep",
+      "name": "Niger",
+      "source": "SNG-WOFI 2020: 7 regional, 0 intermediate, 255 municipal governments"
+    },
+    "NG": {
+      "tier": "keep",
+      "name": "Nigeria",
+      "source": "SNG-WOFI 2020: 37 regional, 0 intermediate, 774 municipal governments"
+    },
+    "NI": {
+      "tier": "only",
+      "ids": ["NI-AN", "NI-AS"],
+      "note": "the two Caribbean Coast autonomous regions; departments are administrative",
+      "name": "Nicaragua",
+      "source": "SNG-WOFI 2020: 2 regional, 0 intermediate, 153 municipal governments"
+    },
+    "NL": {
+      "tier": "keep",
+      "name": "Netherlands",
+      "source": "SNG-WOFI 2020: 12 regional, 0 intermediate, 352 municipal governments"
+    },
+    "NO": {
+      "tier": "group",
+      "by": "map",
+      "groups": {
+        "Innlandet": ["NO-04", "NO-05"],
+        "Agder": ["NO-09", "NO-10"],
+        "Vestland": ["NO-12", "NO-14"],
+        "Trøndelag": ["NO-16", "NO-17"]
+      },
+      "exclude": ["NO-21", "NO-X01~"],
+      "note": "pre-2020 counties regrouped into the 15 counties in force since 2024 (Akershus and Buskerud borders approximate); Svalbard and Bouvet Island left out",
+      "name": "Norway",
+      "source": "SNG-WOFI 2020: 11 regional, 0 intermediate, 356 municipal governments"
+    },
+    "NP": {
+      "tier": "replace",
+      "source": "SNG-WOFI 2020: 7 regional, 0 intermediate, 753 municipal governments",
+      "note": "7 provinces (since 2015) from geoBoundaries; Natural Earth has the old zones",
+      "name": "Nepal",
+      "file": "NPL-ADM1"
+    },
+    "NZ": {
+      "tier": "keep",
+      "name": "New Zealand",
+      "source": "SNG-WOFI 2020: 11 regional, 0 intermediate, 67 municipal governments"
+    },
+    "OM": {
+      "tier": "none",
+      "name": "Oman",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "PA": {
+      "tier": "none",
+      "name": "Panama",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 81 municipal governments"
+    },
+    "PE": {
+      "tier": "keep",
+      "name": "Peru",
+      "source": "SNG-WOFI 2020: 25 regional, 0 intermediate, 2069 municipal governments"
+    },
+    "PG": {
+      "tier": "keep",
+      "name": "Papua New Guinea",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "PH": {
+      "tier": "only",
+      "types": ["Province"],
+      "note": "the provinces; highly urbanized cities are municipalities",
+      "name": "Philippines",
+      "source": "SNG-WOFI 2020: 82 regional, 1634 intermediate, 42046 municipal governments"
+    },
+    "PK": {
+      "tier": "keep",
+      "name": "Pakistan",
+      "source": "SNG-WOFI 2020: 4 regional, 0 intermediate, 12369 municipal governments"
+    },
+    "PL": {
+      "tier": "keep",
+      "name": "Poland",
+      "source": "SNG-WOFI 2020: 16 regional, 380 intermediate, 2477 municipal governments"
+    },
+    "PR": {
+      "tier": "none",
+      "name": "Puerto Rico",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "PS": {
+      "tier": "keep",
+      "policy": true,
+      "note": "policy question left to the maintainer: SNG-WOFI lists municipalities only; the West Bank and Gaza are kept as before",
+      "name": "Palestine",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 485 municipal governments"
+    },
+    "PT": {
+      "tier": "only",
+      "ids": ["PT-20", "PT-30"],
+      "note": "the Azores and Madeira; mainland districts are administrative",
+      "name": "Portugal",
+      "source": "SNG-WOFI 2020: 2 regional, 0 intermediate, 308 municipal governments"
+    },
+    "PY": {
+      "tier": "keep",
+      "name": "Paraguay",
+      "source": "SNG-WOFI 2020: 17 regional, 0 intermediate, 261 municipal governments"
+    },
+    "QA": {
+      "tier": "none",
+      "name": "Qatar",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "RO": {
+      "tier": "keep",
+      "name": "Romania",
+      "source": "SNG-WOFI 2020: 42 regional, 0 intermediate, 3180 municipal governments"
+    },
+    "RS": {
+      "tier": "group",
+      "by": "map",
+      "groups": {
+        "Vojvodina": [
+          "RS-01",
+          "RS-02",
+          "RS-03",
+          "RS-04",
+          "RS-05",
+          "RS-06",
+          "RS-07"
+        ]
+      },
+      "only": ["Vojvodina"],
+      "note": "only the Autonomous Province of Vojvodina has its own government",
+      "name": "Serbia",
+      "source": "SNG-WOFI 2020: 1 regional, 0 intermediate, 145 municipal governments"
+    },
+    "RU": {
+      "tier": "keep",
+      "name": "Russia",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "RW": {
+      "tier": "none",
+      "name": "Rwanda",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 28 municipal governments"
+    },
+    "SA": {
+      "tier": "keep",
+      "name": "Saudi Arabia",
+      "source": "SNG-WOFI 2020: 13 regional, 136 intermediate, 285 municipal governments"
+    },
+    "SB": {
+      "tier": "keep",
+      "name": "Solomon Islands",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "SD": {
+      "tier": "keep",
+      "name": "Sudan",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "SE": {
+      "tier": "keep",
+      "name": "Sweden",
+      "source": "SNG-WOFI 2020: 20 regional, 0 intermediate, 290 municipal governments"
+    },
+    "SI": {
+      "tier": "none",
+      "name": "Slovenia",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 212 municipal governments"
+    },
+    "SK": {
+      "tier": "keep",
+      "name": "Slovakia",
+      "source": "SNG-WOFI 2020: 8 regional, 0 intermediate, 2890 municipal governments"
+    },
+    "SL": {
+      "tier": "none",
+      "name": "Sierra Leone",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 22 municipal governments"
+    },
+    "SN": {
+      "tier": "replace",
+      "source": "SNG-WOFI 2020: 43 regional, 0 intermediate, 557 municipal governments",
+      "note": "45 departments (elected councils since 2013) from geoBoundaries; Natural Earth has the regions",
+      "name": "Senegal",
+      "file": "SEN-ADM2"
+    },
+    "SO": {
+      "tier": "keep",
+      "name": "Somalia",
+      "source": "SNG-WOFI 2020: 18 regional, 0 intermediate, 98 municipal governments"
+    },
+    "SOM": {
+      "tier": "none",
+      "name": "Somaliland",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "SR": {
+      "tier": "none",
+      "name": "Suriname",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "SS": {
+      "tier": "keep",
+      "name": "South Sudan",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "SV": {
+      "tier": "none",
+      "name": "El Salvador",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 262 municipal governments"
+    },
+    "SY": {
+      "tier": "none",
+      "name": "Syria",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "SZ": {
+      "tier": "none",
+      "name": "Eswatini",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 68 municipal governments"
+    },
+    "TD": {
+      "tier": "keep",
+      "name": "Chad",
+      "source": "SNG-WOFI 2020: 23 regional, 115 intermediate, 420 municipal governments"
+    },
+    "TG": {
+      "tier": "keep",
+      "name": "Togo",
+      "source": "SNG-WOFI 2020: 5 regional, 1 intermediate, 117 municipal governments"
+    },
+    "TH": {
+      "tier": "keep",
+      "name": "Thailand",
+      "source": "SNG-WOFI 2020: 76 regional, 0 intermediate, 2443 municipal governments"
+    },
+    "TJ": {
+      "tier": "keep",
+      "name": "Tajikistan",
+      "source": "SNG-WOFI 2020: 4 regional, 68 intermediate, 368 municipal governments"
+    },
+    "TL": {
+      "tier": "none",
+      "name": "Timor-Leste",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "TM": {
+      "tier": "none",
+      "name": "Turkmenistan",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "TN": {
+      "tier": "keep",
+      "name": "Tunisia",
+      "source": "SNG-WOFI 2020: 24 regional, 0 intermediate, 350 municipal governments"
+    },
+    "TR": {
+      "tier": "keep",
+      "name": "Turkey",
+      "source": "SNG-WOFI 2020: 81 regional, 0 intermediate, 1390 municipal governments"
+    },
+    "TT": {
+      "tier": "none",
+      "name": "Trinidad and Tobago",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "TW": {
+      "tier": "keep",
+      "name": "Taiwan",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "TZ": {
+      "tier": "none",
+      "name": "Tanzania",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 150 municipal governments"
+    },
+    "UA": {
+      "tier": "keep",
+      "name": "Ukraine",
+      "source": "SNG-WOFI 2020: 27 regional, 136 intermediate, 1469 municipal governments"
+    },
+    "UG": {
+      "tier": "none",
+      "name": "Uganda",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 176 municipal governments"
+    },
+    "US": {
+      "tier": "keep",
+      "name": "United States",
+      "source": "SNG-WOFI 2020: 50 regional, 3031 intermediate, 35748 municipal governments"
+    },
+    "UY": {
+      "tier": "keep",
+      "name": "Uruguay",
+      "source": "SNG-WOFI 2020: 19 regional, 0 intermediate, 125 municipal governments"
+    },
+    "UZ": {
+      "tier": "keep",
+      "name": "Uzbekistan",
+      "source": "SNG-WOFI 2020: 14 regional, 294 intermediate, 9168 municipal governments"
+    },
+    "VE": {
+      "tier": "keep",
+      "name": "Venezuela",
+      "source": "SNG-WOFI 2020: 25 regional, 0 intermediate, 335 municipal governments"
+    },
+    "VN": {
+      "tier": "keep",
+      "name": "Vietnam",
+      "source": "SNG-WOFI 2020: 63 regional, 707 intermediate, 10614 municipal governments"
+    },
+    "VU": {
+      "tier": "keep",
+      "name": "Vanuatu",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "XK": {
+      "tier": "none",
+      "name": "Kosovo",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 38 municipal governments"
+    },
+    "YE": {
+      "tier": "none",
+      "name": "Yemen",
+      "source": "Not in SNG-WOFI; classified from national sources"
+    },
+    "ZA": {
+      "tier": "keep",
+      "name": "South Africa",
+      "source": "SNG-WOFI 2020: 9 regional, 0 intermediate, 257 municipal governments"
+    },
+    "ZM": {
+      "tier": "none",
+      "name": "Zambia",
+      "source": "SNG-WOFI 2020: 0 regional, 0 intermediate, 116 municipal governments"
+    },
+    "ZW": {
+      "tier": "keep",
+      "name": "Zimbabwe",
+      "source": "SNG-WOFI 2020: 10 regional, 0 intermediate, 92 municipal governments"
+    }
+  }
+}

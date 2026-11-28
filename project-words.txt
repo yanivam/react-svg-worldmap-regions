@@ -1,3 +1,5 @@
+ABRUZZO
+Adjara
 agentic
 Akrotiri
 Aksai
@@ -10,6 +12,8 @@ bbox
 Brasília
 Burkina
 colour
+Côte
+d'Ivoire
 Darussalam
 Demchok
 Dhabi
@@ -20,6 +24,8 @@ estados
 Eswatini
 Faso
 formik
+geoboundaries
+geoBoundaries
 Gilgit
 Guantánamo
 habitantes
@@ -32,6 +38,7 @@ Kuala
 lcov
 Leste
 Lumpur
+Länder
 maintainership
 Marino
 maxdepth
@@ -40,11 +47,13 @@ MINURSO
 mundial
 méxico
 Nagorno
+Nakhchivan
 Ningxia
 nocheck
 npmjs
 npmrc
 nvkelso
+OCHA
 Odesa
 OIDC
 Paracel
@@ -55,9 +64,13 @@ pids
 población
 presimplify
 principales
+RCMRD
 responsify
 RGDS
 Rica
+ROAP
+ROWCA
+Runfola
 rusia
 Sahrawi
 Siachen
@@ -65,12 +78,15 @@ socio-economic
 softprops
 Spratly
 sublayer
+Subnational
+subnational
 testid
 topo
 topojson
 trackpad
 Transnistria
 typecheck
+UCLG
 unidos
 UNMOGIP
 UNSD
@@ -79,7 +95,9 @@ unstub
 UNTERM
 Visvalingam
 vitest
+Vojvodina
 WCAG
+WOFI
 worktree
 worldmap
 yanivam
