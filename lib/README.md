@@ -5,7 +5,7 @@ States, provinces and other first-level regions (admin-1) for [react-svg-worldma
 - **Optional.** `react-svg-worldmap` works the same with or without this package. Nothing changes until you pass the provider to a map.
 - **Loads only what is needed.** Each country is a separate file that your bundler emits as its own chunk. It downloads the first time the map is zoomed in on that country, and never before.
 - **Local data.** No map service and no network requests other than your own app's chunks.
-- **4,139 regions in 175 countries**, from Natural Earth (public domain), about 2.9 MB in total and 1 to 190 kB per country.
+- **4,139 regions in 175 countries**, from Natural Earth (public domain), about 6 MB in total (2.2 MB gzipped) and 1 to 450 kB per country (at most 140 kB gzipped).
 
 ## Install
 
@@ -37,7 +37,7 @@ export default function App() {
 }
 ```
 
-Regions appear at zoom level 4 and above, for the countries in view. Change that with `zoom={{ regionDetailMinScale: 3 }}`. With react-svg-worldmap 3.0.0, add `theme="atlasLight"` for pale water inside the globe and fine solid region borders, and `zoom={{ maxScale: 16, showRegionLabels: true }}` to zoom deeper and name the regions that fit.
+Regions appear at zoom level 4 and above, for the countries in view. Change that with `zoom={{ regionDetailMinScale: 3 }}`. With react-svg-worldmap 3.0.0, add `theme="atlasLight"` for pale water inside the globe and fine solid region borders, and `zoom={{ maxScale: 32, showRegionLabels: true }}` to zoom deeper and name the regions that fit.
 
 ## API
 
