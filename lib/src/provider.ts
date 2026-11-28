@@ -4,7 +4,8 @@ import {
   createReadyDetailResult,
   createUnavailableDetailResult,
 } from "react-svg-worldmap";
-import type { createRegionStore } from "./store.js";
+import type { Bounds, RegionStore } from "./store.js";
+import { levelForScale } from "./store.js";
 
 export interface RegionsDetailProviderOptions {
   /**
@@ -16,12 +17,37 @@ export interface RegionsDetailProviderOptions {
   exclude?: readonly string[];
 }
 
-type Store = ReturnType<typeof createRegionStore>;
+/** The view react-svg-worldmap 3 passes to `loadRegions` and `viewKey`. */
+export interface RegionsView {
+  scale: number;
+  bounds: [[number, number], [number, number]];
+}
+
+/** A `DetailProvider` that loads only the regions in view. */
+export interface RegionsDetailProvider extends DetailProvider {
+  loadRegions: (
+    countryCode: ISOCode,
+    view?: RegionsView,
+  ) => ReturnType<DetailProvider["loadRegions"]>;
+  viewKey: (countryCode: ISOCode, view: RegionsView) => string;
+}
+
+type Store = RegionStore;
+
+// Before a country's level-0 file has loaded, the key follows a grid of the
+// view, so the map asks again (and gets only the chunks in view) once it has.
+const gridSize = { 1: 10, 2: 2.5 };
+
+function toBounds({
+  bounds: [[west, south], [east, north]],
+}: RegionsView): Bounds {
+  return [west, south, east, north];
+}
 
 export function createProviderFromStore(
   store: Store,
   options: RegionsDetailProviderOptions = {},
-): DetailProvider {
+): RegionsDetailProvider {
   const only =
     options.countries != null
       ? new Set(options.countries.map((code) => code.toUpperCase()))
@@ -39,7 +65,16 @@ export function createProviderFromStore(
 
   return {
     supports,
-    async loadRegions(countryCode) {
+    viewKey(countryCode, view) {
+      const level = levelForScale(view.scale);
+      const bounds = toBounds(view);
+      const key = store.viewKey(countryCode, level, bounds);
+      if (key != null) return key;
+      const size = gridSize[level as 1 | 2];
+      const cell = (value: number) => Math.floor(value / size);
+      return `${level}~${cell(bounds[0])},${cell(bounds[1])},${cell(bounds[2])},${cell(bounds[3])}`;
+    },
+    async loadRegions(countryCode, view) {
       if (!supports(countryCode)) {
         return createUnavailableDetailResult(
           countryCode,
@@ -47,7 +82,11 @@ export function createProviderFromStore(
         );
       }
       try {
-        const collection = await store.load(countryCode);
+        // Without a view (react-svg-worldmap 2.x), the whole country at
+        // level 1.
+        const collection = await (view
+          ? store.load(countryCode, levelForScale(view.scale), toBounds(view))
+          : store.load(countryCode, 1));
         if (!collection || collection.regions.length === 0)
           return createUnavailableDetailResult(countryCode);
         return createReadyDetailResult(collection);

@@ -11,7 +11,11 @@ Natural Earth marks its admin-1 layer as beta, and some region names and divisio
 ## Processing
 
 1. Each Natural Earth unit is assigned to a react-svg-worldmap country by its ISO 3166-1 code, with the exceptions below.
-2. Each country is simplified (Visvalingam, 2.5 × 10⁻⁹ steradians, a triangle of about 0.1 km², enough for zoom 64) and quantized to a 200,000 × 200,000 grid of its own bounding box. Small islands keep their shape instead of disappearing.
+2. Each country is built at three levels of detail (Visvalingam simplification, then quantization to a grid of each file's bounding box). Small islands keep their shape instead of disappearing.
+   - Level 0, for zoom below 8: 10⁻⁶ steradians (a triangle of about 40 km²), 10,000 × 10,000 grid, one file per country.
+   - Level 1, zoom 8 to 24: 10⁻⁷ steradians (about 4 km²), 100,000 × 100,000 grid.
+   - Level 2, zoom 24 and above: 2.5 × 10⁻⁹ steradians (about 0.1 km²), 200,000 × 200,000 grid, enough for zoom 64.
+   - Levels 1 and 2 are split into chunks of nearby regions of at most 48 kB (a single larger region stays whole), by halving along the longer side. The level-0 file lists each chunk's bounds, so the provider loads only the chunks in view.
 3. **Alignment check.** For every region, a point inside its largest polygon must lie inside the same country in react-svg-worldmap's detailed (10m) country borders. The build fails otherwise. This keeps the region layer and the country layer in agreement on every boundary the map draws, disputed ones included.
 
 ## Recognition-sensitive cases

@@ -1,6 +1,7 @@
 agentic
 Akrotiri
 Aksai
+antimeridian
 Ashburn
 Azad
 Baikonur
@@ -55,6 +56,7 @@ población
 presimplify
 principales
 responsify
+RGDS
 Rica
 rusia
 Sahrawi

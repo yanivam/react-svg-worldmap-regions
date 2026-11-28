@@ -1,11 +1,19 @@
-import type { DetailProvider, RegionCollection } from "react-svg-worldmap";
+import type { RegionCollection } from "react-svg-worldmap";
 import { regionCountries, regionLoaders } from "./loaders.js";
-import type { RegionsDetailProviderOptions } from "./provider.js";
+import type {
+  RegionsDetailProvider,
+  RegionsDetailProviderOptions,
+} from "./provider.js";
 import { createProviderFromStore } from "./provider.js";
 import { createRegionStore } from "./store.js";
+import type { DetailLevel } from "./store.js";
 
-export type { RegionsDetailProviderOptions } from "./provider.js";
-export type { RegionCountryInfo } from "./store.js";
+export type {
+  RegionsDetailProvider,
+  RegionsDetailProviderOptions,
+  RegionsView,
+} from "./provider.js";
+export type { DetailLevel, RegionCountryInfo } from "./store.js";
 export { sourceSummary, sourceUrl } from "./store.js";
 
 const store = createRegionStore(regionLoaders, regionCountries);
@@ -27,19 +35,29 @@ export function hasRegions(countryCode: string): boolean {
 }
 
 /**
- * Loads one country's regions. Each country is a separate file that bundlers
- * emit as its own chunk, so it downloads only the first time it is asked
- * for. Resolves to `undefined` for a country without regions.
+ * Loads one country's regions, at a level of detail (default 2, the most
+ * detailed) and optionally only the part within `[west, south, east, north]`
+ * bounds. The data is split into files that bundlers emit as chunks of their
+ * own, so each downloads only the first time it is needed. Resolves to
+ * `undefined` for a country without regions.
  */
 export function loadRegionCollection(
   countryCode: string,
+  level: DetailLevel = 2,
+  bounds?: readonly [number, number, number, number],
 ): Promise<RegionCollection | undefined> {
-  return store.load(countryCode);
+  return store.load(countryCode, level, bounds);
 }
 
-/** Starts loading the regions of these countries ahead of time. */
-export function preloadRegions(countryCodes: readonly string[]): Promise<void> {
-  return Promise.all(countryCodes.map((code) => store.load(code))).then(
+/**
+ * Starts loading the regions of these countries ahead of time, at a level of
+ * detail (default 0, what the map shows first).
+ */
+export function preloadRegions(
+  countryCodes: readonly string[],
+  level: DetailLevel = 0,
+): Promise<void> {
+  return Promise.all(countryCodes.map((code) => store.load(code, level))).then(
     () => undefined,
   );
 }
@@ -53,11 +71,13 @@ export function preloadRegions(countryCodes: readonly string[]): Promise<void> {
  * <WorldMap data={data} zoom detailLevel="regions" detailProvider={provider} />
  * ```
  *
- * Create it once (outside the component or with `useMemo`): the map loads
- * each country at most once per provider.
+ * Create it once (outside the component or with `useMemo`). With
+ * react-svg-worldmap 3, it loads a coarse file per country below zoom 8, and
+ * above that only the chunks of the country in view, in more detail as you
+ * zoom in. With 2.x, it loads each country once.
  */
 export function createRegionsDetailProvider(
   options?: RegionsDetailProviderOptions,
-): DetailProvider {
+): RegionsDetailProvider {
   return createProviderFromStore(store, options);
 }

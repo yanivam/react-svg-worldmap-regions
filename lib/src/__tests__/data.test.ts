@@ -46,7 +46,9 @@ describe("generated region data", () => {
       const collection = await loadRegionCollection(code);
       const ids = collection!.regions.map((region) => region.id);
       expect(new Set(ids).size).toBe(ids.length);
-      expect(ids.length).toBe(regionCountries[code]!.regionCount);
+      expect(`${code} ${ids.length}`).toBe(
+        `${code} ${regionCountries[code]!.regionCount}`,
+      );
       for (const region of collection!.regions)
         expect(["Polygon", "MultiPolygon"]).toContain(region.geometry.type);
       const shortNames = collection!.regions.map(
@@ -56,6 +58,8 @@ describe("generated region data", () => {
         true,
       );
       expect(new Set(shortNames).size).toBe(shortNames.length);
+      // Never just a number.
+      for (const name of shortNames) expect(name).toMatch(/[A-Za-z]/);
     }
   });
 
