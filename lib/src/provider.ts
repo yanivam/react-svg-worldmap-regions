@@ -44,6 +44,14 @@ function toBounds({
   return [west, south, east, north];
 }
 
+// When the next zoom step (2x) reaches a finer level, download its chunks
+// for the middle of the view while the browser is idle.
+function scheduleIdle(task: () => void): void {
+  if (typeof globalThis.requestIdleCallback === "function")
+    globalThis.requestIdleCallback(task, { timeout: 2000 });
+  else setTimeout(task, 200);
+}
+
 export function createProviderFromStore(
   store: Store,
   options: RegionsDetailProviderOptions = {},
@@ -63,9 +71,41 @@ export function createProviderFromStore(
     return store.has(code);
   }
 
+  // Each country, level and view is prefetched once.
+  const prefetched = new Set<string>();
+  function prefetchNextLevel(countryCode: ISOCode, view: RegionsView): void {
+    const level = levelForScale(view.scale);
+    const next = levelForScale(view.scale * 2);
+    if (next === level || !supports(countryCode)) return;
+    const [west, south, east, north] = toBounds(view);
+    const key = [countryCode, next, west, south, east, north]
+      .map((value) => (typeof value === "number" ? value.toFixed(1) : value))
+      .join("|");
+    if (prefetched.has(key)) return;
+    prefetched.add(key);
+    if (west > east) {
+      // Across the antimeridian: the whole view.
+      scheduleIdle(() =>
+        store.prefetch(countryCode, next, [west, south, east, north]),
+      );
+      return;
+    }
+    // The next step shows the middle half of the view.
+    const quarterX = (east - west) / 4;
+    const quarterY = (north - south) / 4;
+    const middle: Bounds = [
+      west + quarterX,
+      south + quarterY,
+      east - quarterX,
+      north - quarterY,
+    ];
+    scheduleIdle(() => store.prefetch(countryCode, next, middle));
+  }
+
   return {
     supports,
     viewKey(countryCode, view) {
+      prefetchNextLevel(countryCode, view);
       const level = levelForScale(view.scale);
       const bounds = toBounds(view);
       const key = store.viewKey(countryCode, level, bounds);

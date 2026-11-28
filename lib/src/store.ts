@@ -129,6 +129,11 @@ export interface RegionStore {
     level: DetailLevel,
     bounds?: Bounds,
   ) => string | undefined;
+  /**
+   * Downloads (without decoding) the files `load` would need, so a later
+   * load does not wait for the network.
+   */
+  prefetch: (countryCode: string, level: DetailLevel, bounds?: Bounds) => void;
 }
 
 export function createRegionStore(
@@ -243,5 +248,21 @@ export function createRegionStore(
     return collection;
   }
 
-  return { has, load, viewKey };
+  function prefetch(
+    countryCode: string,
+    level: DetailLevel,
+    bounds?: Bounds,
+  ): void {
+    const code = countryCode.toUpperCase();
+    if (!has(code) || level === 0) return;
+    manifest(code).then(
+      (known) => {
+        for (const index of chunksInView(known, level, bounds))
+          loadFile(`${code}-${level}-${index}`).catch(() => undefined);
+      },
+      () => undefined,
+    );
+  }
+
+  return { has, load, viewKey, prefetch };
 }

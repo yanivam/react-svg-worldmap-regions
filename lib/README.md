@@ -3,7 +3,7 @@
 States, provinces and other first-level regions (admin-1) for [react-svg-worldmap](https://github.com/yanivam/react-svg-worldmap). Zoom in on a country and the map draws its regions.
 
 - **Optional.** `react-svg-worldmap` works the same with or without this package. Nothing changes until you pass the provider to a map.
-- **Loads only what is needed.** The data comes in three levels of detail. Below zoom 8 the map loads one small file per country in view; above it, only the chunks (about 48 kB each) of the part in view, in more detail from zoom 24. Each file is its own chunk in your bundler, downloads the first time it is needed, and is decoded once. Zooming into Europe at 4x loads 0.8 MB instead of 4.1 MB with a single level.
+- **Loads only what is needed.** The data comes in three levels of detail. Below zoom 8 the map loads one small file per country in view; above it, only the chunks (about 48 kB each) of the part in view, in more detail from zoom 24. Each file is its own chunk in your bundler, downloads the first time it is needed (or while the browser is idle, one zoom step before it is needed), and is decoded once. Zooming into Europe at 4x loads 0.8 MB instead of 4.1 MB with a single level.
 - **Local data.** No map service and no network requests other than your own app's chunks.
 - **4,139 regions in 175 countries**, from Natural Earth (public domain), detailed enough for zoom 64x. The package is 5.3 MB (15 MB unpacked, 702 files); an app downloads only the files for what its users look at.
 

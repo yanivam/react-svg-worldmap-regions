@@ -122,6 +122,17 @@ describe("createRegionStore", () => {
     expect(store.viewKey("FJ", 1, [50, 50, 60, 60])).toBe("1:");
   });
 
+  it("prefetches the chunks for a view without decoding them", async () => {
+    const { store, calls } = makeStore();
+    store.prefetch("FJ", 2, [-1, -1, 2, 2]);
+    store.prefetch("FJ", 0);
+    store.prefetch("ZZ", 2);
+    await vi.waitFor(() => expect(calls).toEqual(["FJ", "FJ-2-0"]));
+    // Loading it later uses the downloaded file.
+    await store.load("FJ", 2, [-1, -1, 2, 2]);
+    expect(calls).toEqual(["FJ", "FJ-2-0"]);
+  });
+
   it("resolves undefined for an unknown country", async () => {
     const { store } = makeStore();
     expect(store.has("ZZ")).toBe(false);
@@ -206,6 +217,26 @@ describe("createProviderFromStore", () => {
     ]);
     expect(provider.viewKey("FJ", view(30, [-1, -1, 2, 2]))).toBe("2:0");
     expect(calls).toEqual(["FJ", "FJ-2-0"]);
+  });
+
+  it("prefetches the next level when the next zoom step needs it", async () => {
+    vi.useFakeTimers();
+    const { store, calls } = makeStore();
+    const provider = createProviderFromStore(store);
+    // Zoom 16 is level 1; zoom 32 is level 2. Asking for the view's key is
+    // enough.
+    provider.viewKey("FJ", view(16, [-4, -4, 4, 4]));
+    provider.viewKey("FJ", view(16, [-4, -4, 4, 4]));
+    // From zoom 4 (level 0), the next step (8) is level 1.
+    provider.viewKey("FJ", view(4, [-4, -4, 4, 4]));
+    // From zoom 8, the next step (16) is level 1 again: nothing to fetch.
+    provider.viewKey("FJ", view(8, [-4, -4, 4, 4]));
+    await vi.runAllTimersAsync();
+    expect(calls).toEqual(["FJ", "FJ-2-0", "FJ-1-0"]);
+    // Across the antimeridian, the whole view.
+    provider.viewKey("FJ", view(16, [170, -4, -170, 4]));
+    await vi.runAllTimersAsync();
+    vi.useRealTimers();
   });
 
   it("honours countries and exclude", async () => {
