@@ -53,8 +53,10 @@ Regions appear at zoom level 4 and above, for the countries in view. Change that
 Every region has a `name` and a `shortName`, worked out when the data is built (the package only reads them). Short names are unique within a country and never just a number:
 
 1. the official short name: the ISO 3166-2 code when it has letters (MA for Massachusetts, BY for Bayern), else Natural Earth's postal code;
-2. else the initials of the name (Rio Grande do Sul: RGDS);
-3. else, if those are taken, the first two letters of the first word, the first in capitals (Aisne: Ai), then three (Ais), and so on.
+2. else, for a one-word name, its first three letters, the first a capital (Bayern without its code would be Bay; Aisne: Ais), then four, and so on;
+3. else the initials of the name (Rio Grande do Sul: RGDS), then the first two letters of the first word (Ri), three, and so on.
+
+Short names are letters only, never digits.
 
 Region ids are ISO 3166-2 codes (`US-CA`, `UA-43`) where Natural Earth has one, and Natural Earth's own `adm1_code` otherwise. Each region path carries `data-region-id`, `data-region-name` and `data-country-code`.
 
