@@ -49,6 +49,13 @@ describe("generated region data", () => {
       expect(ids.length).toBe(regionCountries[code]!.regionCount);
       for (const region of collection!.regions)
         expect(["Polygon", "MultiPolygon"]).toContain(region.geometry.type);
+      const shortNames = collection!.regions.map(
+        (region) => (region as { shortName?: string }).shortName,
+      );
+      expect(shortNames.every((name) => name != null && name.length > 0)).toBe(
+        true,
+      );
+      expect(new Set(shortNames).size).toBe(shortNames.length);
     }
   });
 
@@ -58,5 +65,10 @@ describe("generated region data", () => {
     expect(ids).toContain("US-CA");
     expect(ids).toContain("US-DC");
     expect(ids.length).toBe(51);
+    const massachusetts = us!.regions.find((region) => region.id === "US-MA");
+    expect(massachusetts).toMatchObject({
+      name: "Massachusetts",
+      shortName: "MA",
+    });
   });
 });

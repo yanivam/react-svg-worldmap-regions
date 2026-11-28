@@ -24,7 +24,7 @@ const fixtureRegions: GeoJSON.FeatureCollection<GeoJSON.Geometry | null> = {
   features: [
     {
       type: "Feature",
-      properties: { i: "FJ-1", n: "One" },
+      properties: { i: "FJ-1", n: "One", s: "O" },
       geometry: box(0, 0, 1, 1),
     },
     {
@@ -60,6 +60,7 @@ describe("createRegionStore", () => {
     expect(collection?.regions[0]).toMatchObject({
       countryCode: "FJ",
       name: "One",
+      shortName: "O",
       geometry: { type: "Polygon" },
     });
     await store.load("FJ");

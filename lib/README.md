@@ -5,7 +5,7 @@ States, provinces and other first-level regions (admin-1) for [react-svg-worldma
 - **Optional.** `react-svg-worldmap` works the same with or without this package. Nothing changes until you pass the provider to a map.
 - **Loads only what is needed.** Each country is a separate file that your bundler emits as its own chunk. It downloads the first time the map is zoomed in on that country, and never before.
 - **Local data.** No map service and no network requests other than your own app's chunks.
-- **4,139 regions in 175 countries**, from Natural Earth (public domain), about 6 MB in total (2.2 MB gzipped) and 1 to 450 kB per country (at most 140 kB gzipped).
+- **4,139 regions in 175 countries**, from Natural Earth (public domain), detailed enough for zoom 64x: about 7.9 MB in total (2.9 MB gzipped), 1 to 600 kB per country (at most 200 kB gzipped).
 
 ## Install
 
@@ -37,7 +37,7 @@ export default function App() {
 }
 ```
 
-Regions appear at zoom level 4 and above, for the countries in view. Change that with `zoom={{ regionDetailMinScale: 3 }}`. With react-svg-worldmap 3.0.0, add `theme="atlasLight"` for pale water inside the globe and fine solid region borders, and `zoom={{ maxScale: 32, showRegionLabels: true }}` to zoom deeper and name the regions that fit.
+Regions appear at zoom level 4 and above, for the countries in view. Change that with `zoom={{ regionDetailMinScale: 3 }}`. With react-svg-worldmap 3.0.0, add `theme="atlasLight"` for pale water inside the globe and fine solid region borders, and `zoom={{ maxScale: 64, showRegionLabels: true }}` to zoom deeper and name the regions: the long name where it fits, the short one (MA for Massachusetts) where it does not. `regionLabelFormat: "long"` or `"short"` picks one.
 
 ## API
 
@@ -49,6 +49,8 @@ Regions appear at zoom level 4 and above, for the countries in view. Change that
 | `hasRegions(countryCode)` | Whether the package has regions for a country. Loads nothing. |
 | `regionCountryCodes`, `regionCountries` | The countries with regions, and each one's name and region count. Load nothing. |
 | `sourceSummary`, `sourceUrl` | Attribution text and link for the data. |
+
+Every region has a `name` and a `shortName`. Short names are the ISO 3166-2 subdivision code where there is one when it has letters (MA, BY), else Natural Earth's postal code, else initials or the first letters of the name; they are unique within a country.
 
 Region ids are ISO 3166-2 codes (`US-CA`, `UA-43`) where Natural Earth has one, and Natural Earth's own `adm1_code` otherwise. Each region path carries `data-region-id`, `data-region-name` and `data-country-code`.
 

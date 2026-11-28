@@ -54,8 +54,10 @@ describe("WorldMap with the regions provider", () => {
     expect(regionPaths(container)).toHaveLength(0);
 
     fireEvent.click(screen.getByRole("button", { name: "Zoom in" }));
-    await waitFor(() =>
-      expect(regionPaths(container).length).toBeGreaterThan(0),
+    // Decoding a large country takes a moment.
+    await waitFor(
+      () => expect(regionPaths(container).length).toBeGreaterThan(0),
+      { timeout: 5000 },
     );
     const asked = provider.loadRegions.mock.calls.map(([code]) => code);
     // Zooming in from the top-left corner shows North America and Russia.
@@ -80,8 +82,10 @@ describe("WorldMap with the regions provider", () => {
       />,
     );
     fireEvent.click(screen.getByRole("button", { name: "Zoom in" }));
-    await waitFor(() =>
-      expect(regionPaths(container).length).toBeGreaterThan(0),
+    // Decoding a large country takes a moment.
+    await waitFor(
+      () => expect(regionPaths(container).length).toBeGreaterThan(0),
+      { timeout: 5000 },
     );
     for (const path of regionPaths(container))
       expect(path.getAttribute("data-country-code")).toBe("US");

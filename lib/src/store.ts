@@ -13,6 +13,8 @@ export interface RegionProperties {
   i: string;
   /** Region name. */
   n: string;
+  /** Short name, such as `MA` for Massachusetts. */
+  s?: string;
 }
 
 export type RegionTopology = Topology<{
@@ -60,6 +62,9 @@ export function decodeRegions(
             id: feature.properties.i,
             countryCode,
             name: feature.properties.n,
+            ...(feature.properties.s != null
+              ? { shortName: feature.properties.s }
+              : {}),
             geometry: feature.geometry,
           },
         ],
