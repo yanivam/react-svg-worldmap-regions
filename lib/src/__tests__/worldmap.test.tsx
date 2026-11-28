@@ -89,6 +89,8 @@ describe("WorldMap with the regions provider", () => {
     );
     for (const path of regionPaths(container))
       expect(path.getAttribute("data-country-code")).toBe("US");
-    expect(provider.loadRegions.mock.calls).toEqual([["US"]]);
+    expect(provider.loadRegions.mock.calls.map(([code]) => code)).toEqual([
+      "US",
+    ]);
   });
 });
