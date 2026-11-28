@@ -59,7 +59,7 @@ describe("generated region data", () => {
       );
       expect(new Set(shortNames).size).toBe(shortNames.length);
       // Never just a number.
-      for (const name of shortNames) expect(name).toMatch(/[A-Za-z]/);
+      for (const name of shortNames) expect(name).toMatch(/^[A-Za-z]+$/);
     }
   });
 
